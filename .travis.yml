@@ -9,7 +9,7 @@ julia:
 notifications:
   email: false
 script:
-- if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-- julia -e 'Pkg.clone(pwd()); Pkg.build("AutoBenchmark"); Pkg.test("AutoBenchmark"; coverage=true)'
+  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+  - julia -e 'Pkg.clone(pwd()); Pkg.build("AutoBenchmark"); Pkg.test("AutoBenchmark"; coverage=true)'
 after_success:
   - julia -e 'cd(Pkg.dir("AutoBenchmark")); Pkg.add("Coverage"); using Coverage; Codecov.submit(process_folder())'
