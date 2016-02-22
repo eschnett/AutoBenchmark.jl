@@ -98,6 +98,13 @@ function runbench(name::AbstractString, fsym::Symbol, x0, args...;
             end
         end
     end
+    if isempty(results)
+        println()
+        println("*** Could not obtain any results ***")
+        println("Most likely, the benchmark kernel is too simple,")
+        println("and the optimizer was able to collapse multiple chained invocations.")
+        return nothing, results
+    end
     lt(cr1, cr2) = cr1[2].mintime < cr2[2].mintime
     minres = sort(collect(results), lt=lt)[1]
     println()
