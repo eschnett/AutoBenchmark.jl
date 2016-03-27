@@ -114,6 +114,11 @@ function runbench(name::AbstractString, fsym::Symbol, x0, args...;
     minres, results
 end
 
+"""
+    @benchmark(name, f, x0, args...)
+
+Benchmark function `f(x, args...)`
+"""
 macro benchmark(name, f, x0, args...)
     quote
         fsym = gensym(:kernel)
